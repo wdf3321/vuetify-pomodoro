@@ -1,13 +1,14 @@
 <template lang="pug">
 v-app
   v-app-bar(color="primary")
+    v-app-bar-nav-icon#icon
     v-app-bar-title 番茄鐘
     v-btn(icon="mdi-home" variant="text" to="/")
     v-btn(icon="mdi-format-list-bulleted" variant="text" to="/list")
     v-btn(icon="mdi-cog" variant="text" to="/settings")
     v-btn(:icon="notify ? 'mdi-bell' : 'mdi-bell-off'" variant="text" @click="toggleNotify")
   v-main
-    v-container
+    v-container.p-0
       router-view(v-slot="{ Component }")
         //- 換頁保留元件不被銷毀
         //- 設定 include 指定要保留的元件
@@ -23,3 +24,10 @@ const settings = useSettingsStore()
 const { notify } = storeToRefs(settings)
 const { toggleNotify } = settings
 </script>
+
+<style>
+#icon{
+color:#fff;
+background:transparent;
+}
+</style>

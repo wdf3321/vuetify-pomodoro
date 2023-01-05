@@ -1,12 +1,13 @@
 <template lang="pug">
-v-row#home
+v-row#home.text-center
   v-col(cols="12")
     h1 {{ currentText }}
     h1 {{ currentTime }}
+v-row.text-center
   v-col(cols="12")
     v-btn(v-if="status !== 1" icon="mdi-play" variant="text" @click="startTimer")
     v-btn(v-if="status === 1" icon="mdi-pause" variant="text" @click="pauseTimer")
-    v-btn(v-if="currentItem.length > 0" icon="mdi-skip-next" variant="text" @click="finishTimer")
+    v-btn(v-if="currentItem.length >= 0" icon="mdi-skip-next" variant="text" @click="finishTimer")
 </template>
 
 <script setup>
@@ -55,7 +56,7 @@ const finishTimer = () => {
   if (notify.value) {
     // eslint-disable-next-line
     const notification = new Notification('事項完成', {
-      body: currentText.value,
+      body: currentText.value + '已完成',
       icon: 'https://github.com/wdaweb.png'
     })
   }
@@ -66,7 +67,7 @@ const finishTimer = () => {
 }
 
 const currentText = computed(() => {
-  return currentItem.value.length > 0 ? currentItem.value : items.value.length > 0 ? '點擊開始' : '沒有事項'
+  return currentItem.value.length > 0 ? currentItem.value : items.value.length > 0 ? `即將開始 : ${list.items[0].name} ` : '沒有事項'
 })
 const currentTime = computed(() => {
   const m = Math.floor(timeleft.value / 60).toString().padStart(2, '0')
@@ -74,3 +75,15 @@ const currentTime = computed(() => {
   return m + ':' + s
 })
 </script>
+<style>
+.v-main{
+  background:#F8BBD0;
+}
+
+#home{
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+</style>
