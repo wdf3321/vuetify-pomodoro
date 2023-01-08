@@ -16,8 +16,8 @@ v-row.text-center
     v-table
       thead
         tr
-          th 名稱
-          th 操作
+          th.text-center 任務
+          th.text-center 操作
       tbody
         tr(v-if="items.length === 0")
           td.text-center(colspan="2") 沒有事項
@@ -33,11 +33,11 @@ v-row.text-center
               v-btn(icon="mdi-pencil" variant="text" color="green" @click="editItem(item.id)")
               v-btn(icon="mdi-delete" variant="text" color="red" @click="delItem(item.id)")
     h1.text-center 已完成事項
-    v-table.text-center
+    v-table
       thead
         tr
-          th 名稱
-          th 操作
+          th.text-center 任務
+          th.text-center 操作
       tbody
         tr(v-if="finishedItems.length === 0")
           td.text-center(colspan="2") 沒有事項

@@ -1,31 +1,40 @@
+.v-app
+  max-height:300vh
 .v-img
   width: 100%
-  height: 50%
+  max-height: 100%
 .v-main
   background: primary
 #thing
   text-align: center
 // .v-app-bar
-  .-v-btn-group
-  
-    
+// .-v-btn-group
+
+.v-text-field
+  margin-top: 1.5rem
+
+h1
+  margin-bottom: 1rem
+  margin-top: 2rem 
   
 
     
 @media (max-width:768px)
+  
+
   #home
     display: flex
     flex-direction: column
-    min-height: 70vh
-  #home
-    min-height: 100vh
+    max-height: 100vh
   .v-btn-group
-    margin:  20% auto
+    margin: 10% auto
   
-  
+    
 @media (min-width:768px)
+  #home
+    max-height: 100vh
   .v-main
-    height: 75vh
+    max-height: 200vh
     
   
 

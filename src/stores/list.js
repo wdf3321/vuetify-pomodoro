@@ -50,7 +50,7 @@ export const useListStore = defineStore({
     start () {
       // this.currentItem = this.items[0].name
       // this.items.splice(0, 1)
-      this.currentItem = this.break ? '休息一下' : this.items.shift().name
+      this.currentItem = this.break ? '休息一下' : '任務名稱：' + this.items.shift().name
     },
     countdown () {
       this.timeleft--
