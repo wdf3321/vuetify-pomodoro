@@ -8,7 +8,6 @@ v-row.text-center
       v-btn(v-if="status !== 1" icon="mdi-play" variant="text" @click="startTimer" )
       v-btn(v-if="status === 1" icon="mdi-pause" variant="text" @click="pauseTimer" )
       v-btn(v-if="currentItem.length >= 0" right icon="mdi-skip-next" variant="text" @click="finishTimer" )
-  
   v-col.v-col-lg-6.v-col-12(cols="6" justify="center")
     v-text-field(ref="input" v-model="newItem" label="新增事項" :rules="[rules.required, rules.length]" @keydown.enter="onInputSubmit")
       template(#append)
