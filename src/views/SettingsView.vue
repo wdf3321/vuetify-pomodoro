@@ -1,8 +1,8 @@
 <template lang="pug">
-v-row#settings
+v-row#settings(justify="center" align="center")
   v-col(cols="12")
     h1.text-center 設定
-  v-col(cols="12")
+  v-col.v-col-12.v-col-lg-9
     v-table
       thead
         tr

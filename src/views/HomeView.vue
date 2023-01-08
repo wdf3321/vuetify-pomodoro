@@ -1,20 +1,19 @@
 <template lang="pug">
-v-row#home.text-center
-  v-col.v-col-lg-6.v-col-12
+v-row.text-center
+  v-col#home.v-col-lg-6.v-col-12(justify="center")
     h1 {{ currentText }}
     h1 剩餘 {{ currentTime }}
-v-row.text-center
-  v-col.v-col-lg-6.v-col-12(cols="6")
-    v-btn(v-if="status !== 1" icon="mdi-play" variant="text" @click="startTimer" size="96")
-    v-btn(v-if="status === 1" icon="mdi-pause" variant="text" @click="pauseTimer" size="96")
-    v-btn(v-if="currentItem.length >= 0" icon="mdi-skip-next" variant="text" @click="finishTimer" size="96")
-v-row
+    v-img(src="https://media.tenor.com/1RyQpvCnaF0AAAAC/bird-parrot.gif")
+    v-btn-group
+      v-btn(v-if="status !== 1" icon="mdi-play" variant="text" @click="startTimer" )
+      v-btn(v-if="status === 1" icon="mdi-pause" variant="text" @click="pauseTimer" )
+      v-btn(v-if="currentItem.length >= 0" right icon="mdi-skip-next" variant="text" @click="finishTimer" )
+  
   v-col.v-col-lg-6.v-col-12(cols="6" justify="center")
-    h1#thing.text-center 待辦事項
     v-text-field(ref="input" v-model="newItem" label="新增事項" :rules="[rules.required, rules.length]" @keydown.enter="onInputSubmit")
       template(#append)
         v-btn(icon="mdi-plus" variant="text" @click="onInputSubmit")
-  v-col.v-col-12.v-col-lg-6(align="end")
+    h1#thing.text-center 待辦事項
     v-table
       thead
         tr
@@ -34,6 +33,20 @@ v-row
             span(v-else)
               v-btn(icon="mdi-pencil" variant="text" color="green" @click="editItem(item.id)")
               v-btn(icon="mdi-delete" variant="text" color="red" @click="delItem(item.id)")
+    h1.text-center 已完成事項
+    v-table.text-center
+      thead
+        tr
+          th 名稱
+          th 操作
+      tbody
+        tr(v-if="finishedItems.length === 0")
+          td.text-center(colspan="2") 沒有事項
+        tr(v-for="item in finishedItems" v-else :key="item.id" ref="editInputs")
+          td {{ item.name }}
+          td
+            v-btn(icon="mdi-pencil" variant="text" color="green" @click="editItem(item.id)")
+            v-btn(icon="mdi-delete" variant="text" color="red" @click="delFinishedItem(item.id)")
 </template>
 
 <script setup>

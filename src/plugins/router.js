@@ -27,6 +27,14 @@ const router = createRouter({
       meta: {
         title: 'Pomodoro | list'
       }
+    },
+    {
+      path: '/asd',
+      name: 'asd',
+      component: () => import('@/views/asdView.vue'),
+      meta: {
+        title: 'Pomodoro | list'
+      }
     }
   ]
 })

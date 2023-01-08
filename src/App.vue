@@ -1,12 +1,13 @@
 <template lang="pug">
 v-app
-  v-app-bar(color="primary")
-    v-app-bar-nav-icon#icon
+  v-app-bar(color="#F06292")
+    v-app-bar-nav-icon#icon()
     v-app-bar-title 番茄鐘
     v-btn(icon="mdi-home" variant="text" to="/")
     v-btn(icon="mdi-format-list-bulleted" variant="text" to="/list")
     v-btn(icon="mdi-cog" variant="text" to="/settings")
     v-btn(:icon="notify ? 'mdi-bell' : 'mdi-bell-off'" variant="text" @click="toggleNotify")
+
   v-main
     v-container.p-0
       router-view(v-slot="{ Component }")
