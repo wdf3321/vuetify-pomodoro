@@ -1,11 +1,12 @@
 <template lang="pug">
 v-row#list
   v-col(cols="12")
-    h1.text-center 待辦事項
-  v-col(cols="12")
     v-text-field(ref="input" v-model="newItem" label="新增事項" :rules="[rules.required, rules.length]" @keydown.enter="onInputSubmit")
       template(#append)
         v-btn(icon="mdi-plus" variant="text" @click="onInputSubmit")
+v-row
+  v-col.v-col-lg-6.v-col-12
+    h1.text-center 待辦事項
     v-table
       thead
         tr
@@ -25,10 +26,8 @@ v-row#list
             span(v-else)
               v-btn(icon="mdi-pencil" variant="text" color="green" @click="editItem(item.id)")
               v-btn(icon="mdi-delete" variant="text" color="red" @click="delItem(item.id)")
-  v-divider
-  v-col(cols="12")
+  v-col.v-col-lg-6.v-col-12
     h1.text-center 已完成事項
-  v-col(cols="12")
     v-table
       thead
         tr
@@ -49,7 +48,14 @@ import { storeToRefs } from 'pinia'
 import { useListStore } from '@/stores/list'
 
 const list = useListStore()
-const { addItem, editItem, delItem, confirmEditItem, undoEditItem, delFinishedItem } = list
+const {
+  addItem,
+  editItem,
+  delItem,
+  confirmEditItem,
+  undoEditItem,
+  delFinishedItem
+} = list
 const { items, finishedItems } = storeToRefs(list)
 
 const newItem = ref('')

@@ -1,14 +1,20 @@
 <template lang="pug">
 v-app(:theme="theme")
-  v-app-bar(color='#f06292')
-    v-app-bar-nav-icon#icon()
-    v-app-bar-title 番茄鐘
-    v-btn(icon="mdi-home" variant="text" to="/")
+  v-app-bar(color="#f06292")
+    v-app-bar-nav-icon#icon(v-model="drawer" @click.stop="drawer = !drawer")
+    v-app-bar-title 番茄鐘 | POMODORO
+    //- v-btn(icon="mdi-home" variant="text" to="/")
     //- v-btn(icon="mdi-format-list-bulleted" variant="text" to="/list")
     v-btn(:icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'" @click="themeChange")
-    v-btn(icon="mdi-cog" variant="text" to="/settings")
+    //- v-btn(icon="mdi-cog" variant="text" to="/settings")
     v-btn(:icon="notify ? 'mdi-bell' : 'mdi-bell-off'" variant="text" @click="toggleNotify")
-
+  v-navigation-drawer(
+v-model="drawer" absolute
+      temporary)
+    v-list
+    v-list-item(to="/" title="首頁" prepend-icon="mdi-home")
+    v-list-item(to="/list" title="事件" prepend-icon="mdi-shopping")
+    v-list-item(to="/settings" title="鈴聲選擇" prepend-icon="mdi-format-list-bulleted")
   v-main
     v-container.p-0
       router-view(v-slot="{ Component }")
@@ -17,6 +23,7 @@ v-app(:theme="theme")
         keep-alive(include="HomeView")
           //- 動態元件，將元件以 is 傳入
           component(:is="Component")
+
 </template>
 
 <script setup>
@@ -32,14 +39,28 @@ function themeChange () {
   theme.value = theme.value === 'dark' ? 'light' : 'dark'
 }
 </script>
+<script>
 
-<style>
-#icon{
-background:transparent;
+export default {
+  data: () => ({
+    drawer: false,
+    group: null
+  }),
+
+  watch: {
+    group () {
+      this.drawer = false
+    }
+  }
 }
-.v-btn
-{
-  color: primary;
-  background:transparent;
+
+</script>
+<style>
+#icon {
+  background: transparent;
+}
+.v-btn {
+  filter: hue-rotate(180deg);
+  background: transparent;
 }
 </style>

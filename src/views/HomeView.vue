@@ -1,17 +1,25 @@
 <template lang="pug">
 v-row.text-center
-  v-col#home.v-col-lg-6.v-col-12(justify="center")
+  v-col#home.v-col-lg-6.v-col-12(justify-lg="center")
     h1 {{ currentText }}
     h1 剩餘 {{ currentTime }}
     v-img(src="https://media.tenor.com/1RyQpvCnaF0AAAAC/bird-parrot.gif")
-    v-btn-group
-      v-btn(v-if="status !== 1" icon="mdi-play" variant="text" @click="startTimer" )
-      v-btn(v-if="status === 1" icon="mdi-pause" variant="text" @click="pauseTimer" )
-      v-btn(v-if="currentItem.length >= 0" right icon="mdi-skip-next" variant="text" @click="finishTimer" )
-  v-col.v-col-lg-6.v-col-12(cols="6" justify="center")
-    v-text-field(ref="input" v-model="newItem" label="新增事項" :rules="[rules.required, rules.length]" @keydown.enter="onInputSubmit")
-      template(#append)
-        v-btn(icon="mdi-plus" variant="text" @click="onInputSubmit")
+  v-row.text-center
+    v-col.v-col-11
+      v-btn(v-if="status !== 1" icon="mdi-play" variant="text" size="96" @click="startTimer")
+        span.hidden-sm-and-down 開始
+        v-icon(right)   mdi-arrow-right-drop-circle
+      v-btn(v-if="status === 1" icon="mdi-pause" variant="text" size="96" @click="pauseTimer" )
+        span.hidden-sm-and-down Left
+        v-icon(right)   mdi-format-align-left
+      v-btn(v-if="currentItem.length >= 0" right icon="mdi-skip-next" variant="text" size="96" @click="finishTimer" )
+        span.hidden-sm-and-down 下面一位
+        v-icon(right)   mdi-bitcoin
+      v-text-field(ref="input" v-model="newItem" label="新增事項" :rules="[rules.required, rules.length]" @keydown.enter="onInputSubmit")
+        template(#append)
+          v-btn(icon="mdi-plus" variant="text" @click="onInputSubmit")
+v-row.text-center
+  v-col.v-col-11(justify="center" align-self="center")
     h1#thing.text-center 待辦事項
     v-table
       thead
@@ -32,8 +40,8 @@ v-row.text-center
             span(v-else)
               v-btn(icon="mdi-pencil" variant="text" color="green" @click="editItem(item.id)")
               v-btn(icon="mdi-delete" variant="text" color="red" @click="delItem(item.id)")
-    h1.text-center 已完成事項
-    v-table
+    h1.text-center(v-if="finishedItems.length > 0") 已完成事項
+    v-table(v-if="finishedItems.length > 0")
       thead
         tr
           th.text-center 任務
@@ -56,7 +64,17 @@ import { storeToRefs } from 'pinia'
 
 const list = useListStore()
 const { currentItem, items, timeleft, finishedItems } = storeToRefs(list)
-const { start, countdown, finish, addItem, editItem, delItem, confirmEditItem, undoEditItem, delFinishedItem } = list
+const {
+  start,
+  countdown,
+  finish,
+  addItem,
+  editItem,
+  delItem,
+  confirmEditItem,
+  undoEditItem,
+  delFinishedItem
+} = list
 
 const settings = useSettingsStore()
 const { selectedAlarmFile, notify } = storeToRefs(settings)
@@ -114,8 +132,8 @@ const finishTimer = () => {
   audio.play()
   if (notify.value) {
     // eslint-disable-next-line
-    const notification = new Notification('事項完成', {
-      body: currentText.value + '已完成',
+    const notification = new Notification("事項完成", {
+      body: currentText.value,
       icon: 'https://github.com/wdf3321.png'
     })
   }
@@ -126,23 +144,25 @@ const finishTimer = () => {
 }
 
 const currentText = computed(() => {
-  return currentItem.value.length > 0 ? currentItem.value : items.value.length > 0 ? `即將開始 : ${list.items[0].name} ` : '請新增事項'
+  return currentItem.value.length > 0
+    ? currentItem.value
+    : items.value.length > 0
+      ? `即將開始 : ${list.items[0].name} `
+      : '請新增事項'
 })
 const currentTime = computed(() => {
-  const m = Math.floor(timeleft.value / 60).toString().padStart(2, '0')
+  const m = Math.floor(timeleft.value / 60)
+    .toString()
+    .padStart(2, '0')
   const s = (timeleft.value % 60).toString().padStart(2, '0')
   return m + ':' + s
 })
 </script>
-<!-- <style>
-.v-main{
-  background:#F8BBD0;
+<style>
+.v-btn {
+  filter: hue-rotate(180deg);
 }
-
-#home{
-height: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
+.v-col {
+  margin: auto;
 }
-</style> -->
+</style>
