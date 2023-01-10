@@ -3,7 +3,7 @@ v-row.text-center
   v-col#home.v-col-lg-6.v-col-12(justify-lg="center")
     h1 {{ currentText }}
     h1 剩餘 {{ currentTime }}
-    v-img(contain max-height="370" src="https://media.tenor.com/3_mXIoBPNhoAAAAi/party-parrot.gif")
+    v-img(contain max-height="370" src="src/assets/party-parrot.gif")
   v-row.text-center
     v-col.v-col-11
       v-btn(v-if="status !== 1" icon="mdi-play" variant="text" size="96" @click="startTimer")
@@ -20,8 +20,8 @@ v-row.text-center
           v-btn(icon="mdi-plus" variant="text" @click="onInputSubmit")
 v-row.text-center
   v-col.v-col-11(justify="center" align-self="center")
-    h1#thing.text-center 待辦事項
-    v-table
+    h1#thing.text-center(v-if="items.length > 0") 待辦事項
+    v-table(v-if="items.length > 0")
       thead
         tr
           th.text-center 任務
@@ -134,7 +134,7 @@ const finishTimer = () => {
     // eslint-disable-next-line
     const notification = new Notification("事項完成", {
       body: currentText.value,
-      icon: 'https://github.com/wdf3321.png'
+      icon: 'src/assets/party-parrot.gif'
     })
   }
   finish()
