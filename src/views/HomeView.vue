@@ -3,15 +3,15 @@ v-row.text-center
   v-col#home.v-col-lg-6.v-col-12(justify-lg="center")
     h1 {{ currentText }}
     h1 剩餘 {{ currentTime }}
-    v-img(src="https://media.tenor.com/1RyQpvCnaF0AAAAC/bird-parrot.gif")
+    v-img(contain max-height="370" src="https://media.tenor.com/3_mXIoBPNhoAAAAi/party-parrot.gif")
   v-row.text-center
     v-col.v-col-11
       v-btn(v-if="status !== 1" icon="mdi-play" variant="text" size="96" @click="startTimer")
         span.hidden-sm-and-down 開始
         v-icon(right)   mdi-arrow-right-drop-circle
-      v-btn(v-if="status === 1" icon="mdi-pause" variant="text" size="96" @click="pauseTimer" )
-        span.hidden-sm-and-down Left
-        v-icon(right)   mdi-format-align-left
+      v-btn(v-if="status === 1" icon="mdi-pause-circle" variant="text" size="96" @click="pauseTimer" )
+        span.hidden-sm-and-down 暫停
+        v-icon(right)   mdi-pause-circle
       v-btn(v-if="currentItem.length >= 0" right icon="mdi-skip-next" variant="text" size="96" @click="finishTimer" )
         span.hidden-sm-and-down 下面一位
         v-icon(right)   mdi-bitcoin

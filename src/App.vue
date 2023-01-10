@@ -63,4 +63,7 @@ export default {
   filter: hue-rotate(180deg);
   background: transparent;
 }
+.v-navigation-drawer{
+max-height: 100vh;
+}
 </style>
