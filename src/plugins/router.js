@@ -9,7 +9,7 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
       meta: {
-        title: 'Pomodoro'
+        title: '番茄鐘 | Pomodoro'
       }
     },
     {

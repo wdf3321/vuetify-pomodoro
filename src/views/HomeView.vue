@@ -3,7 +3,7 @@ v-row.text-center
   v-col#home.v-col-lg-6.v-col-12(justify-lg="center")
     h1 {{ currentText }}
     h1 剩餘 {{ currentTime }}
-    v-img(contain max-height="370" src="src/assets/party-parrot.gif")
+    v-img(contain max-height="370" src="https://media.tenor.com/3_mXIoBPNhoAAAAi/party-parrot.gif")
   v-row.text-center
     v-col.v-col-11
       v-btn(v-if="status !== 1" icon="mdi-play" variant="text" size="96" @click="startTimer")
@@ -134,7 +134,7 @@ const finishTimer = () => {
     // eslint-disable-next-line
     const notification = new Notification("事項完成", {
       body: currentText.value,
-      icon: 'src/assets/party-parrot.gif'
+      icon: 'https://media.tenor.com/3_mXIoBPNhoAAAAi/party-parrot.gif'
     })
   }
   finish()
