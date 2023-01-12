@@ -3,19 +3,21 @@ v-row.text-center
   v-col#home.v-col-lg-6.v-col-12(justify-lg="center")
     h1 {{ currentText }}
     h1 剩餘 {{ currentTime }}
-    v-img(contain max-height="370" src="https://media.tenor.com/3_mXIoBPNhoAAAAi/party-parrot.gif")
+    div
+      v-img#parrot1(v-if="status !== 1" contain max-height="370" src="https://miro.medium.com/max/2400/1*RB7t8PJCW9mtBrDCvBxXPg.png")
+      v-img(v-if="status === 1" contain max-height="370" src="https://media.tenor.com/3_mXIoBPNhoAAAAi/party-parrot.gif")
   v-row.text-center
     v-col.v-col-11
-      v-btn(v-if="status !== 1" icon="mdi-play" variant="text" size="96" @click="startTimer")
+      v-btn(v-if="status !== 1" icon="mdi-play" color="secondary" variant="text" size="96" @click="startTimer")
         span.hidden-sm-and-down 開始
         v-icon(right)   mdi-arrow-right-drop-circle
       v-btn(v-if="status === 1" icon="mdi-pause-circle" variant="text" size="96" @click="pauseTimer" )
         span.hidden-sm-and-down 暫停
         v-icon(right)   mdi-pause-circle
-      v-btn(v-if="currentItem.length >= 0" right icon="mdi-skip-next" variant="text" size="96" @click="finishTimer" )
+      v-btn(v-if="currentItem.length > 0" right icon="mdi-skip-next" variant="text" size="96" @click="finishTimer" )
         span.hidden-sm-and-down 下面一位
         v-icon(right)   mdi-bitcoin
-      v-text-field(ref="input" v-model="newItem" label="新增事項" :rules="[rules.required, rules.length]" @keydown.enter="onInputSubmit")
+      v-text-field(ref="input" v-model="newItem" label="新增事項" color="secondary" :rules="[rules.required, rules.length]" @keydown.enter="onInputSubmit" )
         template(#append)
           v-btn(icon="mdi-plus" variant="text" @click="onInputSubmit")
 v-row.text-center
@@ -157,12 +159,15 @@ const currentTime = computed(() => {
   const s = (timeleft.value % 60).toString().padStart(2, '0')
   return m + ':' + s
 })
+
 </script>
-<style>
-.v-btn {
-  filter: hue-rotate(180deg);
-}
+<style style="scss">
+
 .v-col {
   margin: auto;
 }
+h1{
+font-size: 2.5rem;
+}
+
 </style>

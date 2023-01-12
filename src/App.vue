@@ -55,7 +55,7 @@ export default {
 }
 
 </script>
-<style>
+<style lang="scss">
 #icon {
   background: transparent;
 }
